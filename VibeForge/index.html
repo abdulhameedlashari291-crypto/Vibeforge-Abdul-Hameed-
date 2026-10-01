@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="sd" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>سندِ حق (Sanad-e-Haq) | تحفظِ اراضی و وراثت</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #064e3b;
+      --primary-accent: #10b981;
+      --primary-light: #ecfdf5;
+      --gold: #d97706;
+      --gold-light: #fef3c7;
+      
+      --danger: #e11d48;
+      --danger-dark: #9f1239;
+      --danger-light: #fff1f2;
+      --danger-border: #fecdd3;
+
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 20px 30px -10px rgba(6, 78, 59, 0.07), 0 8px 16px -6px rgba(0, 0, 0, 0.04);
+      --shadow-glow: 0 10px 25px -5px rgba(4, 120, 87, 0.35);
+      --shadow-danger-glow: 0 10px 25px -5px rgba(225, 29, 72, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Naskh Arabic', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #d1fae5 0%, #f0fdf4 35%, #f8fafc 80%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px 14px 50px;
+      line-height: 1.7;
+      background-attachment: fixed;
+    }
+
+    .wrapper {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Top Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .badge-official {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-admin-link {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid var(--border);
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .btn-admin-link:hover {
+      border-color: var(--primary-accent);
+      transform: translateY(-1px);
+    }
+
+    /* Header Identity */
+    .app-brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-container {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #fff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .app-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .app-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Modern Stepper Indicator */
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 24px;
+      padding: 0 16px;
+    }
+
+    .stepper::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 36px;
+      right: 36px;
+      height: 3px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    .step-node {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .node-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-node.active .node-circle {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
+      transform: scale(1.05);
+    }
+
+    .step-node.completed .node-circle {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: #fff;
+    }
+
+    .node-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .step-node.active .node-text {
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* Premium Glass Cards */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
+      padding: 26px 20px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .card-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card-heading-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* Inputs */
+    .input-field {
+      margin-bottom: 16px;
+    }
+
+    .input-field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      direction: ltr;
+      text-align: right;
+      outline: none;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      background: #ffffff;
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+    }
+
+    /* Camera Upload Touchpad */
+    .camera-zone {
+      border: 2px dashed #10b981;
+      background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 100%);
+      border-radius: var(--radius-md);
+      padding: 26px 16px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 18px;
+      transition: all 0.2s ease;
+    }
+
+    .camera-zone:hover {
+      background: #d1fae5;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .camera-icon-bubble {
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 28px;
+      box-shadow: 0 8px 16px rgba(4, 120, 87, 0.12);
+    }
+
+    #docFile {
+      display: none;
+    }
+
+    .preview-canvas {
+      display: none;
+      margin-bottom: 18px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 2px solid #e2e8f0;
+      background: #000;
+    }
+
+    .preview-canvas img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #fff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-emerald:hover {
+      background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      color: #fff;
+      box-shadow: var(--shadow-danger-glow);
+    }
+
+    .btn-danger:hover {
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      color: #334155;
+      margin-top: 14px;
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+    }
+
+    /* Step 2: Warning Banner */
+    .warning-card {
+      background: var(--danger-light);
+      border-right: 5px solid var(--danger);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    /* Audio Hub with Soundwave Visualizer Simulation */
+    .voice-hub {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 20px 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .voice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .soundwave-box {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .soundwave-bar {
+      width: 3px;
+      height: 100%;
+      background: #34d399;
+      border-radius: 999px;
+      animation: wave 1s ease-in-out infinite alternate;
+    }
+
+    .soundwave-bar:nth-child(2) { animation-delay: 0.2s; height: 60%; }
+    .soundwave-bar:nth-child(3) { animation-delay: 0.4s; height: 90%; }
+    .soundwave-bar:nth-child(4) { animation-delay: 0.1s; height: 40%; }
+    .soundwave-bar:nth-child(5) { animation-delay: 0.3s; height: 75%; }
+
+    @keyframes wave {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+
+    audio {
+      width: 100%;
+      height: 44px;
+      margin-top: 6px;
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .sindhi-narrative {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--primary-accent);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .hash-ribbon {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      direction: ltr;
+      word-break: break-all;
+      margin-bottom: 20px;
+    }
+
+    .action-duo {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 480px) {
+      .action-duo {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Outcome Cards */
+    .banner-result {
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      text-align: center;
+      margin-top: 14px;
+      animation: zoomIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .freeze-alert {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      color: var(--danger-dark);
+    }
+
+    .qr-showcase {
+      background: #ffffff;
+      border: 2px solid #a7f3d0;
+      box-shadow: var(--shadow-card);
+    }
+
+    .qr-showcase img {
+      width: 190px;
+      height: 190px;
+      margin: 14px auto;
+      display: block;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    /* Modal / Admin View */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 14px;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 680px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 6px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag-status {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .tag-disputed { background: var(--danger-light); color: var(--danger); }
+    .tag-approved { background: var(--primary-light); color: var(--primary); }
+    .tag-pending { background: #fef3c7; color: #b45309; }
+
+    .hidden { display: none !important; }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Top Bar -->
+  <div class="top-nav">
+    <div class="badge-official">
+      <span>🛡️</span> سنڌ زرعي تحفظ پورٽل
+    </div>
+    <button type="button" class="btn-admin-link" id="openAdminBtn">
+      <span>📊 DLEC مانيٽرنگ</span>
+    </button>
+  </div>
+
+  <!-- Header Identity -->
+  <header class="app-brand">
+    <div class="logo-container">📜</div>
+    <h1 class="app-title">سندِ حق (Sanad-e-Haq)</h1>
+    <p class="app-subtitle">صرف سمجهڻ کان پوءِ صحيح فيصلو — خيرپور ڊويزن</p>
+  </header>
+
+  <!-- Interactive Stepper -->
+  <div class="stepper">
+    <div class="step-node active" id="step1">
+      <div class="node-circle">1</div>
+      <div class="node-text">ڪاغذ اسڪين</div>
+    </div>
+    <div class="step-node" id="step2">
+      <div class="node-circle">2</div>
+      <div class="node-text">سنڌي آواز</div>
+    </div>
+    <div class="step-node" id="step3">
+      <div class="node-circle">3</div>
+      <div class="node-text">سند / روڪ</div>
+    </div>
+  </div>
+
+  <!-- Step 1: Upload Card -->
+  <section class="card" id="scanCard">
+    <h2 class="card-heading">
+      <span class="card-heading-icon">📄</span>
+      ڪاغذ جا تفصيل ۽ تصوير داخل ڪريو
+    </h2>
+
+    <form id="uploadForm">
+      <div class="input-field">
+        <label>سائلہ جو شناختي ڪارڊ (CNIC):</label>
+        <input type="text" id="signerCnic" placeholder="45201-1234567-2" required pattern="^\d{5}-\d{7}-\d{1}$" />
+      </div>
+
+      <div class="input-field">
+        <label>رابطي جو موبائل نمبر:</label>
+        <input type="tel" id="signerPhone" placeholder="+923001234567" required pattern="^\+92\d{10}$" />
+      </div>
+
+      <label style="font-size: 14px; font-weight: 600; margin-bottom: 6px; display: block;">اسٽامپ پيپر يا اقرار نامي جي تصوير:</label>
+      <div class="camera-zone" id="triggerUpload">
+        <div class="camera-icon-bubble">📸</div>
+        <span style="font-weight: 700; color: var(--primary-dark); font-size: 16px; display: block;">تصوير ڪڍو يا فائل چونڊيو</span>
+        <span style="font-size: 13px; color: var(--text-muted); margin-top: 4px; display: block;">ڪئميرا سڌي رکو ته جيئن لکيل صاف اچي</span>
+        <input type="file" id="docFile" accept="image/*" capture="environment" />
+      </div>
+
+      <div class="preview-canvas" id="previewBox">
+        <img id="imagePreview" alt="ڪاغذ جي تصوير" />
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn btn-emerald">
+        <span>🔍 ڪاغذ چيڪ ڪريو ۽ آواز ٻڌو</span>
+      </button>
+    </form>
+  </section>
+
+  <!-- Step 2: Voice Summary & Warning -->
+  <section class="card hidden" id="analysisCard">
+    <h2 class="card-heading">
+      <span class="card-heading-icon">⚖️</span>
+      قانوني سچ ۽ سنڌي آواز
+    </h2>
+
+    <div class="warning-card">
+      <div style="color: var(--danger-dark); font-weight: 700; font-size: 16px;" id="transferHeading">دستاويز: جانچ مڪمل</div>
+      <div style="color: #881337; font-size: 14px; margin-top: 6px;" id="riskWarning"></div>
+    </div>
+
+    <!-- Voice Hub with Visualizer -->
+    <div class="voice-hub">
+      <div class="voice-header">
+        <div style="font-size: 15px; font-weight: 700;">🔊 سنڌي زبان ۾ آواز ٻڌو:</div>
+        <div class="soundwave-box">
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+        </div>
+      </div>
+      <audio id="audioElement" controls></audio>
+    </div>
+
+    <label style="font-size: 14px; font-weight: 600; margin-bottom: 6px; display: block;">سادي سنڌي وضاحت:</label>
+    <div class="sindhi-narrative" id="sindhiTextBox"></div>
+
+    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">محفوظ ڊجيٽل نشان (SHA-256):</div>
+    <div class="hash-ribbon" id="docHashSeal"></div>
+
+    <!-- Dual Actions -->
+    <div class="action-duo" id="decisionGrid">
+      <button type="button" id="btnConsent" class="btn btn-emerald">
+        ✅ مان راضي آهيان (منظور)
+      </button>
+      <button type="button" id="btnDispute" class="btn btn-danger">
+        🚨 روڪيو! فراڊ آهي (Freeze)
+      </button>
+    </div>
+  </section>
+
+  <!-- Step 3: Outcomes -->
+  <!-- Dispute Hold -->
+  <div id="freezeAlert" class="banner-result freeze-alert hidden">
+    <h3 style="font-size: 20px; font-weight: 700;">🚫 عمل فوري طور منجمد (FREEZE) ٿي ويو!</h3>
+    <p style="font-size: 15px; margin-top: 8px; line-height: 1.6;">
+      پٽواري جو عمل معطل ڪيو ويو آهي. تحفظ لاءِ ڪيس ضلعي ليگل ايڊ ڪميٽي (DLEC)، خيرپور ڏانهن اماڻيو ويو.
+    </p>
+  </div>
+
+  <!-- QR Stamp -->
+  <div id="qrBox" class="banner-result qr-showcase hidden">
+    <div class="badge-official" style="background: var(--primary-light);">محفوظ با-رضا تصديق</div>
+    <h3 style="color: var(--primary-dark); margin: 10px 0 4px; font-size: 20px; font-weight: 700;">ڪيو آر ڪوڊ سند جاري ٿي وئي</h3>
+    <p style="font-size: 14px; color: var(--text-muted);">هي تصديقي ڪوڊ ڪاغذي اسٽامپ تي چپڪايو ويندو:</p>
+    <img id="qrImage" alt="QR Code" />
+    <button type="button" class="btn btn-outline" onclick="window.print()">
+      🖨️️ پرنٽ يا سند محفوظ ڪريو
+    </button>
+  </div>
+
+</div>
+
+<!-- Admin / DLEC Oversight Modal -->
+<div id="adminModal" class="modal-overlay hidden">
+  <div class="modal-content">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <h3 style="color: var(--primary-dark); font-size: 18px; font-weight: 700;">📊 ضلعي ليگل ڪميٽي (DLEC) مانيٽرنگ</h3>
+      <button type="button" id="closeAdminBtn" style="border:none; background:none; font-size: 22px; cursor: pointer; color: #64748b;">✕</button>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div style="font-size: 12px; color: #64748b;">ڪل ڪيس</div></div>
+      <div class="stat-box"><div class="stat-num" style="color: var(--danger);" id="statDisputed">0</div><div style="font-size: 12px; color: #64748b;">منجمد</div></div>
+      <div class="stat-box"><div class="stat-num" style="color: var(--primary);" id="statApproved">0</div><div style="font-size: 12px; color: #64748b;">منظور</div></div>
+      <div class="stat-box"><div class="stat-num" style="color: #b45309;" id="statPending">0</div><div style="font-size: 12px; color: #64748b;">زيرِ غور</div></div>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr style="background: #f8fafc;">
+          <th>ڪيس ID</th>
+          <th>شناختي ڪارڊ</th>
+          <th>موبائل</th>
+          <th>حيثيت</th>
+          <th>تاريخ</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody">
+        <tr><td colspan="5" style="text-align: center;">لوڊ ٿي رهيو آهي...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const API = "http://127.0.0.1:8000";
+
+  const triggerUpload = document.getElementById("triggerUpload");
+  const docFile = document.getElementById("docFile");
+  const imagePreview = document.getElementById("imagePreview");
+  const previewBox = document.getElementById("previewBox");
+  const uploadForm = document.getElementById("uploadForm");
+  const submitBtn = document.getElementById("submitBtn");
+
+  const scanCard = document.getElementById("scanCard");
+  const analysisCard = document.getElementById("analysisCard");
+  const transferHeading = document.getElementById("transferHeading");
+  const riskWarning = document.getElementById("riskWarning");
+  const sindhiTextBox = document.getElementById("sindhiTextBox");
+  const docHashSeal = document.getElementById("docHashSeal");
+  const audioElement = document.getElementById("audioElement");
+
+  const step1 = document.getElementById("step1");
+  const step2 = document.getElementById("step2");
+  const step3 = document.getElementById("step3");
+
+  const btnConsent = document.getElementById("btnConsent");
+  const btnDispute = document.getElementById("btnDispute");
+  const decisionGrid = document.getElementById("decisionGrid");
+  const freezeAlert = document.getElementById("freezeAlert");
+  const qrBox = document.getElementById("qrBox");
+  const qrImage = document.getElementById("qrImage");
+
+  let activeCaseId = null;
+
+  triggerUpload.addEventListener("click", () => docFile.click());
+
+  docFile.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        previewBox.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  uploadForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    if (!docFile.files[0]) {
+      alert("مهرباني ڪري تصوير چونڊيو!");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "<span>⏳ معائنو ٿي رهيو آهي... مهرباني ڪري انتظار ڪريو</span>";
+
+    const formData = new FormData();
+    formData.append("signer_cnic", document.getElementById("signerCnic").value.trim());
+    formData.append("signer_phone", document.getElementById("signerPhone").value.trim());
+    formData.append("document_image", docFile.files[0]);
+
+    try {
+      const res = await fetch(`${API}/api/deeds/analyze`, { method: "POST", body: formData });
+      if (!res.ok) throw new Error("دستاويز پڙهڻ ۾ غلطي آئي.");
+      const data = await res.json();
+
+      activeCaseId = data.case_id;
+      transferHeading.textContent = `دستاويز: ${data.transfer_type}`;
+      riskWarning.textContent = data.is_permanent_loss 
+        ? "⚠️ خطرناڪ خبردار: هن ڪاغذ تي صحيح ڪرڻ سان زمين جو حق مستقل ختم ٿي ويندو!"
+        : "معلومات: هي عارضي اختيار معلوم ٿئي ٿو.";
+
+      sindhiTextBox.textContent = data.sindhi_explanation;
+      docHashSeal.textContent = data.doc_hash;
+
+      audioElement.src = `${API}${data.audio_url}`;
+      audioElement.load();
+      audioElement.play().catch(() => console.log("User interaction required for autoplay"));
+
+      step1.classList.remove("active");
+      step1.classList.add("completed");
+      step2.classList.add("active");
+
+      analysisCard.classList.remove("hidden");
+      analysisCard.scrollIntoView({ behavior: "smooth" });
+
+    } catch (err) {
+      alert(err.message || "سرور سان رابطو نه ٿي سگهيو.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "<span>🔍 ڪاغذ چيڪ ڪريو ۽ آواز ٻڌو</span>";
+    }
+  });
+
+  btnConsent.addEventListener("click", async function () {
+    if (!activeCaseId) return;
+    const formData = new FormData();
+    formData.append("action", "APPROVED");
+
+    const res = await fetch(`${API}/api/deeds/${activeCaseId}/decision`, { method: "POST", body: formData });
+    const data = await res.json();
+
+    qrImage.src = `${API}${data.qr_code_url}`;
+    decisionGrid.classList.add("hidden");
+
+    step2.classList.remove("active");
+    step2.classList.add("completed");
+    step3.classList.add("active");
+
+    qrBox.classList.remove("hidden");
+    qrBox.scrollIntoView({ behavior: "smooth" });
+  });
+
+  btnDispute.addEventListener("click", async function () {
+    if (!activeCaseId) return;
+    if (!confirm("ڇا توهان واقعي زمين جي منتقلي روڪڻ چاهيو ٿا؟")) return;
+
+    const formData = new FormData();
+    formData.append("action", "DISPUTED");
+
+    await fetch(`${API}/api/deeds/${activeCaseId}/decision`, { method: "POST", body: formData });
+
+    decisionGrid.classList.add("hidden");
+    step2.classList.remove("active");
+    step2.classList.add("completed");
+    step3.classList.add("active");
+
+    freezeAlert.classList.remove("hidden");
+    freezeAlert.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // Admin / DLEC Modal
+  const adminModal = document.getElementById("adminModal");
+  document.getElementById("openAdminBtn").addEventListener("click", async function () {
+    adminModal.classList.remove("hidden");
+    try {
+      const res = await fetch(`${API}/api/admin/records`);
+      const payload = await res.json();
+
+      document.getElementById("statTotal").textContent = payload.stats.total;
+      document.getElementById("statDisputed").textContent = payload.stats.disputed;
+      document.getElementById("statApproved").textContent = payload.stats.approved;
+      document.getElementById("statPending").textContent = payload.stats.pending;
+
+      const tbody = document.getElementById("adminTableBody");
+      tbody.innerHTML = payload.records.map(r => `
+        <tr>
+          <td style="font-weight:700; direction:ltr; text-align:left;">${r.case_id}</td>
+          <td style="direction:ltr; text-align:left;">${r.signer_cnic}</td>
+          <td style="direction:ltr; text-align:left;">${r.signer_phone}</td>
+          <td>
+            <span class="tag-status ${r.status === 'DISPUTED' ? 'tag-disputed' : (r.status === 'APPROVED' ? 'tag-approved' : 'tag-pending')}">
+              ${r.status}
+            </span>
+          </td>
+          <td style="color: #64748b; font-size: 11px;">${r.created_at}</td>
+        </tr>
+      `).join("") || '<tr><td colspan="5" style="text-align:center;">ڪو به رڪارڊ موجود ناهي</td></tr>';
+
+    } catch (e) {
+      alert("Error fetching records");
+    }
+  });
+
+  document.getElementById("closeAdminBtn").addEventListener("click", () => {
+    adminModal.classList.add("hidden");
+  });
+</script>
+
+</body>
+</html>
